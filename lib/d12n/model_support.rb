@@ -2,10 +2,12 @@ module D12n
   module ModelSupport
     module ClassMethods
       def d12n_attribute(*args)
+        options = args.extract_options!
+        prefix = options[:prefix] || 'local'
         args.each do |name|
-          attr_reader "local_#{name}"
-          define_method "local_#{name}=" do |val|
-            instance_variable_set "@local_#{name}", val
+          attr_reader "#{prefix}_#{name}"
+          define_method "#{prefix}_#{name}=" do |val|
+            instance_variable_set "@#{prefix}_#{name}", val
             send "#{name}=", D12n.strategy.number_to_bigdecimal(val)
           end
         end
