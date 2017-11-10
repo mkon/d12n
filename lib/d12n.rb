@@ -1,4 +1,4 @@
-require 'active_support/configurable'
+require 'active_support'
 require 'bigdecimal'
 
 module D12n

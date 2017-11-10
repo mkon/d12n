@@ -9,12 +9,27 @@ RSpec.describe 'D12n model support' do
   subject { Dummy.new }
 
   shared_examples 'Correct behavior' do
-    it 'sets the values correctly' do
+    it 'parses the local format correctly' do
       subject.local_amount = input
       expect(subject.amount).to be_a BigDecimal
       expect(subject.amount.to_f).to eq(expected_value)
       expect(subject.local_amount).to eq(input)
     end
+  end
+
+  shared_examples 'when using invalid format' do
+    let(:input) { 'not-a-number' }
+
+    it 'does not set internal amount' do
+      subject.local_amount = input
+      expect(subject.amount).to be nil
+      expect(subject.local_amount).to eq(input)
+    end
+  end
+
+  it 'generates local amount from amount' do
+    subject.amount = 4_567.89
+    expect(subject.local_amount).to eq('4,567.89')
   end
 
   context 'when the default strategy is used' do
@@ -38,6 +53,8 @@ RSpec.describe 'D12n model support' do
 
       include_examples 'Correct behavior'
     end
+
+    it_behaves_like 'when using invalid format'
   end
 
   context 'when the DecimalComma strategy is used' do
@@ -66,6 +83,8 @@ RSpec.describe 'D12n model support' do
 
         include_examples 'Correct behavior'
       end
+
+      it_behaves_like 'when using invalid format'
     end
   end
 end
