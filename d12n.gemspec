@@ -3,17 +3,17 @@ $LOAD_PATH.push File.expand_path('../lib', __FILE__)
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = 'd12n'
-  s.version     = ENV.fetch 'VERSION', '0.0.4'
-  s.authors     = ['mkon']
+  s.version     = ENV.fetch 'VERSION', '0.0.5'
+  s.authors     = ['Konstantin Munteanu']
   s.email       = ['konstantin@munteanu.de']
-  s.homepage    = 'https://github.com/mkon'
+  s.homepage    = 'https://github.com/mkon/d12n'
   s.summary     = 'Delocalization'
   s.description = 'Delocalize numbers'
   s.license     = 'MIT'
 
   s.files = Dir['lib/**/*', 'LICENSE', 'README.md']
 
-  s.add_dependency 'activesupport', '>= 5.0.2', '< 6'
+  s.add_dependency 'activesupport', '>= 4.2', '< 6'
 
   s.add_development_dependency 'rspec', '~> 3'
   s.add_development_dependency 'rubocop', '~> 0'
