@@ -1,4 +1,5 @@
 require 'active_support'
+require 'active_support/core_ext/hash'
 require 'bigdecimal'
 
 module D12n

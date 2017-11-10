@@ -3,28 +3,34 @@ module D12n
     module ClassMethods
       def d12n_attribute(*args)
         options = args.extract_options!
-        prefix = options[:prefix] || 'local'
+        options.reverse_merge! prefix: 'local'
         args.each do |name|
-          define_reader name, prefix
-          define_writer name, prefix
+          define_reader name, options
+          define_writer name, options
         end
       end
 
       private
 
-      def define_reader(name, prefix)
-        define_method "#{prefix}_#{name}" do
-          local = instance_variable_get "@#{prefix}_#{name}"
+      def define_reader(name, options)
+        define_method "#{options[:prefix]}_#{name}" do
+          local = instance_variable_get "@#{options[:prefix]}_#{name}"
           return local if local
-          ActiveSupport::NumberHelper::NumberToDelimitedConverter.convert(send(name), {})
+          number = send(name)
+          # If a factor is defined, internal presentation is an integer multiple of the local value
+          number /= options[:factor].to_f if options[:factor]
+          D12n.strategy.bigdecimal_to_formatted(number)
         end
       end
 
-      def define_writer(name, prefix)
-        define_method "#{prefix}_#{name}=" do |val|
+      def define_writer(name, options)
+        define_method "#{options[:prefix]}_#{name}=" do |val|
           begin
-            instance_variable_set "@#{prefix}_#{name}", val
-            send "#{name}=", D12n.strategy.number_to_bigdecimal(val)
+            instance_variable_set "@#{options[:prefix]}_#{name}", val
+            number = D12n.strategy.formatted_to_bigdecimal(val)
+            # If a factor is defined, internal presentation is an integer multiple of the local value
+            number = (number * options[:factor].to_f).to_i if options[:factor]
+            send "#{name}=", number
             val
           rescue ArgumentError
             val

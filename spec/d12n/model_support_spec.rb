@@ -2,8 +2,9 @@ RSpec.describe 'D12n model support' do
   class Dummy
     include D12n::ModelSupport
 
-    attr_accessor :amount
+    attr_accessor :amount, :cents
     d12n_attribute :amount
+    d12n_attribute :cents, factor: 100
   end
 
   subject { Dummy.new }
@@ -14,6 +15,13 @@ RSpec.describe 'D12n model support' do
       expect(subject.amount).to be_a BigDecimal
       expect(subject.amount.to_f).to eq(expected_value)
       expect(subject.local_amount).to eq(input)
+    end
+
+    it 'parses the local format correctly with a factor' do
+      subject.local_cents = input
+      expect(subject.cents).to be_a Integer
+      expect(subject.cents).to eq(expected_value * 100)
+      expect(subject.local_cents).to eq(input)
     end
   end
 
@@ -30,6 +38,11 @@ RSpec.describe 'D12n model support' do
   it 'generates local amount from amount' do
     subject.amount = 4_567.89
     expect(subject.local_amount).to eq('4,567.89')
+  end
+
+  it 'generates local amount from amount with a factor' do
+    subject.cents = 456_789
+    expect(subject.local_cents).to eq('4,567.89')
   end
 
   context 'when the default strategy is used' do

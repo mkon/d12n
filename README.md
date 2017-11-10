@@ -17,7 +17,7 @@ class Dummy
   include D12n::ModelSupport
 
   attr_accessor :amount
-  d12n_attribute :amount
+  d12n_attribute :amount, factor: 100
 end
 ```
 
@@ -49,3 +49,23 @@ d12n_attribute :amount, prefix: 'localized'
 ```
 
 Would give you `localized_amount` instead of `local_amount`.
+
+### Internal integer representation with a factor
+
+If your internal representation is for example in cents, but the local format should be EUR with decimal point
+you can use this option:
+
+```ruby
+d12n_attribute :amount, factor: 100
+```
+
+```ruby
+d = Dummy.new
+
+d.amount = 1_234
+d.local_amount # "12,34"
+
+d.local_amount = '3,456.78'
+d.amount.class # Integer
+d.amount # 345_678
+```
