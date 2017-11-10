@@ -11,8 +11,8 @@ module I18n
           @config
         when :"number.format.delimiter"
           @config[:delimiter]
-        when :"number.format.seperator"
-          @config[:seperator]
+        when :"number.format.separator"
+          @config[:separator]
         end
       end
     end

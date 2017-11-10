@@ -5,7 +5,7 @@ module D12n
 
       # must raise ArgumentError when format is invalid
       def formatted_to_bigdecimal(formatted)
-        BigDecimal.new formatted.tr(format_delimiter, '').tr(format_seperator, '.')
+        BigDecimal.new formatted.tr(format_delimiter, '').tr(format_separator, '.')
       end
 
       def bigdecimal_to_formatted(internal)
@@ -20,8 +20,8 @@ module D12n
       end
 
       # seperates the decimal points, eg 9.95
-      def format_seperator
-        ::I18n.translate(:'number.format.seperator')
+      def format_separator
+        ::I18n.translate(:'number.format.separator')
       end
     end
   end

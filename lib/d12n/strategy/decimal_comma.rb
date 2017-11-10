@@ -10,7 +10,7 @@ module D12n
         '.'
       end
 
-      def format_seperator
+      def format_separator
         ','
       end
     end

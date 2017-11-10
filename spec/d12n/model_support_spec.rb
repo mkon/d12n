@@ -98,7 +98,7 @@ RSpec.describe 'D12n model support' do
   context 'when the Default strategy is used' do
     context 'when I18n format is decimal point' do
       before do
-        I18n.backend = I18n::Backend::SimpleMock.new(delimiter: ',', seperator: '.')
+        I18n.backend = I18n::Backend::SimpleMock.new(delimiter: ',', separator: '.')
       end
 
       include_examples 'correct behavior for decimal point'
@@ -106,7 +106,7 @@ RSpec.describe 'D12n model support' do
 
     context 'when I18n format is decimal comma' do
       before do
-        I18n.backend = I18n::Backend::SimpleMock.new(delimiter: '.', seperator: ',')
+        I18n.backend = I18n::Backend::SimpleMock.new(delimiter: '.', separator: ',')
       end
 
       include_examples 'correct behavior for decimal comma'
