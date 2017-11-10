@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.description = 'Delocalize numbers'
   s.license     = 'MIT'
 
-  s.files = Dir['lib/**/*', 'README.md']
+  s.files = Dir['lib/**/*', 'LICENSE', 'README.md']
 
   s.add_dependency 'activesupport', '>= 5.0.2', '< 6'
 
