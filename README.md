@@ -1,8 +1,9 @@
 # D12n
 
-D12n (=delocalization) can be used to cast model attributes from localized format BigDecimal. This is done by adding an
-additional attribute to the model which keeps the original value the user is entering. This has the advantage that the
-original user input can be validated and rendered back to the user during validation errors.
+D12n (=delocalization) can be used to cast model attributes from localized format to an internal BigDecimal or Integer
+representation. This is done by adding an additional attribute to the model which keeps the original value the user has
+entered. This has the advantage that the original user input can be validated and rendered back to the user during
+validation errors.
 
 ## Usage
 
@@ -17,7 +18,7 @@ class Dummy
   include D12n::ModelSupport
 
   attr_accessor :amount
-  d12n_attribute :amount, factor: 100
+  d12n_attribute :amount
 end
 ```
 
@@ -38,8 +39,8 @@ d.amount.to_f # 3456.78, did not change
 ## Configuration
 
 ```ruby
-D12n.config.strategy = D12n::Strategy::DecimalPoint # the default
-D12n.config.strategy = D12n::Strategy::DecimalComma
+D12n.config.strategy = D12n::Strategy::DecimalPoint # the default, no need to set it
+D12n.config.strategy = D12n::Strategy::DecimalComma # Use this for example in DE or NL locales
 ```
 
 ### Custom method prefix
