@@ -39,8 +39,16 @@ d.amount.to_f # 3456.78, did not change
 ## Configuration
 
 ```ruby
-D12n.config.strategy = D12n::Strategy::DecimalPoint # the default, no need to set it
-D12n.config.strategy = D12n::Strategy::DecimalComma # Use this for example in DE or NL locales
+# the default, no need to set it
+# It will use the settings from your I18n locale (number.format) to parse and generate the formatted number
+# It is heavily recommended to use this
+D12n.config.strategy = D12n::Strategy::Default
+
+# Hard coded strategy using decimal point
+D12n.config.strategy = D12n::Strategy::DecimalPoint
+
+# Hard coded strategy using decimal comma
+D12n.config.strategy = D12n::Strategy::DecimalComma
 ```
 
 ### Custom method prefix

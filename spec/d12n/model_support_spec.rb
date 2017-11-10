@@ -35,17 +35,7 @@ RSpec.describe 'D12n model support' do
     end
   end
 
-  it 'generates local amount from amount' do
-    subject.amount = 4_567.89
-    expect(subject.local_amount).to eq('4,567.89')
-  end
-
-  it 'generates local amount from amount with a factor' do
-    subject.cents = 456_789
-    expect(subject.local_cents).to eq('4,567.89')
-  end
-
-  context 'when the default strategy is used' do
+  shared_examples 'correct behavior for decimal point' do
     context 'when using , and .' do
       let(:input) { '12,345.67' }
       let(:expected_value) { 12_345.67 }
@@ -70,34 +60,72 @@ RSpec.describe 'D12n model support' do
     it_behaves_like 'when using invalid format'
   end
 
+  shared_examples 'correct behavior for decimal comma' do
+    context 'when using , and .' do
+      let(:input) { '12.345,67' }
+      let(:expected_value) { 12_345.67 }
+
+      include_examples 'Correct behavior'
+    end
+
+    context 'when using ,' do
+      let(:input) { '12345,67' }
+      let(:expected_value) { 12_345.67 }
+
+      include_examples 'Correct behavior'
+    end
+
+    context 'when using .' do
+      let(:input) { '12.345' }
+      let(:expected_value) { 12_345 }
+
+      include_examples 'Correct behavior'
+    end
+
+    it_behaves_like 'when using invalid format'
+  end
+
+  it 'generates local amount from amount' do
+    subject.amount = 4_567.89
+    expect(subject.local_amount).to eq('4,567.89')
+  end
+
+  it 'generates local amount from amount with a factor' do
+    subject.cents = 456_789
+    expect(subject.local_cents).to eq('4,567.89')
+  end
+
+  context 'when the Default strategy is used' do
+    context 'when I18n format is decimal point' do
+      before do
+        I18n.backend = I18n::Backend::SimpleMock.new(delimiter: ',', seperator: '.')
+      end
+
+      include_examples 'correct behavior for decimal point'
+    end
+
+    context 'when I18n format is decimal comma' do
+      before do
+        I18n.backend = I18n::Backend::SimpleMock.new(delimiter: '.', seperator: ',')
+      end
+
+      include_examples 'correct behavior for decimal comma'
+    end
+  end
+
+  context 'when the DecimalPoint strategy is used' do
+    before do
+      allow(D12n).to receive(:strategy).and_return(D12n::Strategy::DecimalPoint)
+    end
+
+    include_examples 'correct behavior for decimal point'
+  end
+
   context 'when the DecimalComma strategy is used' do
     before do
       allow(D12n).to receive(:strategy).and_return(D12n::Strategy::DecimalComma)
     end
 
-    context 'when the default strategy is used' do
-      context 'when using , and .' do
-        let(:input) { '12.345,67' }
-        let(:expected_value) { 12_345.67 }
-
-        include_examples 'Correct behavior'
-      end
-
-      context 'when using ,' do
-        let(:input) { '12345,67' }
-        let(:expected_value) { 12_345.67 }
-
-        include_examples 'Correct behavior'
-      end
-
-      context 'when using .' do
-        let(:input) { '12.345' }
-        let(:expected_value) { 12_345 }
-
-        include_examples 'Correct behavior'
-      end
-
-      it_behaves_like 'when using invalid format'
-    end
+    include_examples 'correct behavior for decimal comma'
   end
 end

@@ -8,11 +8,12 @@ module D12n
   module Strategy
     autoload :DecimalPoint, 'd12n/strategy/decimal_point'
     autoload :DecimalComma, 'd12n/strategy/decimal_comma'
+    autoload :Default,      'd12n/strategy/default'
   end
 
   autoload :ModelSupport, 'd12n/model_support'
 
   def self.strategy
-    config.strategy || Strategy::DecimalPoint
+    config.strategy || Strategy::Default
   end
 end
