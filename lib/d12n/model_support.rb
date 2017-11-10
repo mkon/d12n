@@ -35,6 +35,7 @@ module D12n
       localized = instance_variable_get "@#{options[:prefix]}_#{name}"
       return localized if localized
       number = send(name)
+      return unless number
       # If a factor is defined, internal presentation is an integer multiple of the local value
       number /= options[:factor].to_f if options[:factor]
       D12n.strategy.bigdecimal_to_formatted(number)

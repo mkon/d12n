@@ -7,7 +7,7 @@ RSpec.describe 'D12n model support' do
     d12n_attribute :cents, factor: 100
   end
 
-  subject { Dummy.new }
+  subject(:model) { Dummy.new }
 
   shared_examples 'Correct behavior' do
     it 'parses the local format correctly' do
@@ -85,9 +85,32 @@ RSpec.describe 'D12n model support' do
     it_behaves_like 'when using invalid format'
   end
 
-  it 'generates local amount from amount' do
-    subject.amount = 4_567.89
-    expect(subject.local_amount).to eq('4,567.89')
+  describe 'local reader' do
+    subject { model.local_amount }
+
+    context 'when amount is 4567.89' do
+      before { model.amount = 4_567.89 }
+
+      it { is_expected.to eq '4,567.89' }
+    end
+
+    context 'when amount is nil' do
+      it { is_expected.to eq nil }
+    end
+  end
+
+  describe 'local reader with factor' do
+    subject { model.local_cents }
+
+    context 'when amount is 456_789' do
+      before { model.cents = 456_789 }
+
+      it { is_expected.to eq '4,567.89' }
+    end
+
+    context 'when amount is nil' do
+      it { is_expected.to eq nil }
+    end
   end
 
   it 'generates local amount from amount with a factor' do
