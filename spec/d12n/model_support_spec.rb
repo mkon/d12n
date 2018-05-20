@@ -1,4 +1,4 @@
-RSpec.describe 'D12n model support' do
+RSpec.describe D12n::ModelSupport do
   class Dummy
     include D12n::ModelSupport
 

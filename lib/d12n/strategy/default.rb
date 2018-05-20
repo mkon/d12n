@@ -5,7 +5,7 @@ module D12n
 
       # must raise ArgumentError when format is invalid
       def formatted_to_bigdecimal(formatted)
-        BigDecimal.new formatted.tr(format_delimiter, '').tr(format_separator, '.')
+        BigDecimal(formatted.tr(format_delimiter, '').tr(format_separator, '.'))
       end
 
       def bigdecimal_to_formatted(internal)
