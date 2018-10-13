@@ -1,13 +1,15 @@
 RSpec.describe D12n::ModelSupport do
-  class Dummy
-    include D12n::ModelSupport
+  subject(:model) { klass.new }
 
-    attr_accessor :amount, :cents
-    d12n_attribute :amount
-    d12n_attribute :cents, factor: 100
+  let(:klass) do
+    Class.new do
+      include D12n::ModelSupport
+
+      attr_accessor :amount, :cents
+      d12n_attribute :amount
+      d12n_attribute :cents, factor: 100
+    end
   end
-
-  subject(:model) { Dummy.new }
 
   shared_examples 'Correct behavior' do
     it 'parses the local format correctly' do
