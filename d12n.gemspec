@@ -17,6 +17,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'i18n', '>= 0.7', '< 2'
 
   s.add_development_dependency 'rspec', '~> 3.7'
-  s.add_development_dependency 'rubocop', '0.62.0'
+  s.add_development_dependency 'rubocop', '0.63.0'
   s.add_development_dependency 'rubocop-rspec', '1.31.0'
 end
