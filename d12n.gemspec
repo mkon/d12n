@@ -13,10 +13,10 @@ Gem::Specification.new do |s|
 
   s.files = Dir['lib/**/*', 'LICENSE', 'README.md']
 
-  s.add_dependency 'activesupport', '>= 4.2', '< 6'
+  s.add_dependency 'activesupport', '>= 4.2', '< 7'
   s.add_dependency 'i18n', '>= 0.7', '< 2'
 
-  s.add_development_dependency 'rspec', '~> 3.7'
+  s.add_development_dependency 'rspec', '~> 3.9'
   s.add_development_dependency 'rubocop', '0.75.0'
   s.add_development_dependency 'rubocop-rspec', '1.35.0'
 end
