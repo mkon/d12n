@@ -18,5 +18,5 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rspec', '~> 3.9'
   s.add_development_dependency 'rubocop', '0.75.1'
-  s.add_development_dependency 'rubocop-rspec', '1.36.0'
+  s.add_development_dependency 'rubocop-rspec', '1.37.0'
 end
