@@ -1,7 +1,7 @@
 # D12n
 
 [![Gem Version](https://badge.fury.io/rb/d12n.svg)](https://badge.fury.io/rb/d12n)
-[![Build Status](https://travis-ci.org/mkon/d12n.svg?branch=master)](https://travis-ci.org/mkon/d12n)
+[![Push & PR](https://github.com/mkon/d12n/actions/workflows/main.yml/badge.svg)](https://github.com/mkon/d12n/actions/workflows/main.yml)
 
 D12n (=delocalization) can be used to cast model attributes from localized format to an internal BigDecimal or Integer
 representation. This is done by adding an additional attribute to the model which keeps the original value the user has
