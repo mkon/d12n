@@ -11,9 +11,11 @@ Gem::Specification.new do |s|
   s.description = 'Delocalize numbers'
   s.license     = 'MIT'
 
+  s.required_ruby_version = '>= 2.7', '< 3.1'
+
   s.files = Dir['lib/**/*', 'LICENSE', 'README.md']
 
-  s.add_dependency 'activesupport', '>= 4.2', '< 7'
+  s.add_dependency 'activesupport', '>= 6.1', '< 7.1'
   s.add_dependency 'i18n', '>= 0.7', '< 2'
 
   s.add_development_dependency 'rspec', '~> 3.9'
