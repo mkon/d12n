@@ -3,15 +3,16 @@ module I18n
     class SimpleMock < Simple
       def initialize(config)
         @config = config
+        super()
       end
 
       def translate(_locale, key, _options = {})
         case key
-        when :"number.format"
+        when :'number.format'
           @config
-        when :"number.format.delimiter"
+        when :'number.format.delimiter'
           @config[:delimiter]
-        when :"number.format.separator"
+        when :'number.format.separator'
           @config[:separator]
         end
       end

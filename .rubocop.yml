@@ -1,20 +1,22 @@
 AllCops:
   TargetRubyVersion: 2.7
+  NewCops: enable
 
+Layout/LineLength:
+  Max: 120
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
 
 Lint/AssignmentInCondition:
   Enabled: false
 
-Metrics/LineLength:
-  Max: 120
-
 Style/ClassAndModuleChildren:
   Enabled: false
 Style/ConditionalAssignment:
   Enabled: false
 Style/Documentation:
+  Enabled: false
+Style/FetchEnvVar:
   Enabled: false
 Style/FrozenStringLiteralComment:
   Enabled: false

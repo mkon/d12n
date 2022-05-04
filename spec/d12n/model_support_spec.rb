@@ -6,6 +6,7 @@ RSpec.describe D12n::ModelSupport do
       include D12n::ModelSupport
 
       attr_accessor :amount, :cents
+
       d12n_attribute :amount
       d12n_attribute :cents, factor: 100
     end
@@ -32,7 +33,7 @@ RSpec.describe D12n::ModelSupport do
 
     it 'does not set internal amount' do
       subject.local_amount = input
-      expect(subject.amount).to be nil
+      expect(subject.amount).to be_nil
       expect(subject.local_amount).to eq(input)
     end
   end
@@ -97,7 +98,7 @@ RSpec.describe D12n::ModelSupport do
     end
 
     context 'when amount is nil' do
-      it { is_expected.to eq nil }
+      it { is_expected.to be_nil }
     end
   end
 
@@ -111,7 +112,7 @@ RSpec.describe D12n::ModelSupport do
     end
 
     context 'when amount is nil' do
-      it { is_expected.to eq nil }
+      it { is_expected.to be_nil }
     end
   end
 
