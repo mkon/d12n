@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rspec', '~> 3.9'
   s.add_development_dependency 'rubocop', '1.36.0'
-  s.add_development_dependency 'rubocop-rspec', '2.12.1'
+  s.add_development_dependency 'rubocop-rspec', '2.13.1'
 
   s.metadata['rubygems_mfa_required'] = 'true'
 end
