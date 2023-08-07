@@ -11,16 +11,12 @@ Gem::Specification.new do |s|
   s.description = 'Delocalize numbers'
   s.license     = 'MIT'
 
-  s.required_ruby_version = '>= 2.7', '< 3.1'
+  s.required_ruby_version = '>= 3.0', '< 4'
 
   s.files = Dir['lib/**/*', 'LICENSE', 'README.md']
 
-  s.add_dependency 'activesupport', '>= 6.1', '< 7.1'
+  s.add_dependency 'activesupport', '>= 6.1', '< 8'
   s.add_dependency 'i18n', '>= 0.7', '< 2'
-
-  s.add_development_dependency 'rspec', '~> 3.9'
-  s.add_development_dependency 'rubocop', '1.50.2'
-  s.add_development_dependency 'rubocop-rspec', '2.23.0'
 
   s.metadata['rubygems_mfa_required'] = 'true'
 end
