@@ -7,7 +7,7 @@ group :development, :test do
 
   gem 'rspec', '~> 3.9'
   gem 'rubocop', '1.57.2'
-  gem 'rubocop-rspec', '2.24.1'
+  gem 'rubocop-rspec', '2.25.0'
 end
 
 if (version = ENV['ACTIVESUPPORT'])
