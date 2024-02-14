@@ -6,7 +6,7 @@ group :development, :test do
   gem 'byebug'
 
   gem 'rspec', '~> 3.9'
-  gem 'rubocop', '1.60.1'
+  gem 'rubocop', '1.60.2'
   gem 'rubocop-rspec', '2.26.1'
 end
 
